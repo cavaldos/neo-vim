@@ -13,6 +13,7 @@
 ![Screenshot from 2022-12-10 12-06-26](https://github.com/khanh1507/k-vim/blob/main/screenshort/3.png)
 
 ![Screenshot from 2022-12-10 12-06-26](https://github.com/khanh1507/k-vim/blob/main/screenshort/4.png)
+![Screenshot from 2022-12-10 12-06-26](https://github.com/khanh1507/k-vim/blob/main/screenshort/5.png)
 
 
 # dotfiles
