@@ -153,9 +153,3 @@ $ sudo EDITOR=nvim visudo
 | <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>9</kbd>     | Move to workspace 9      |
 | <kbd>alt</kbd> + <kbd>i</kbd>                        | System mode (lock,suspend,shutdow, exit,...) |
 | <kbd>alt</kbd> + <kbd>r</kbd>                        | Mode resize              |
-
-## Screenshots
-![2022-08-24_02-30](https://user-images.githubusercontent.com/64464369/186250868-e335a6ce-158d-408e-8695-5057d2d072a1.png)
-![2022-08-24_02-34](https://user-images.githubusercontent.com/64464369/186250895-c7703c0e-69a1-4a84-a01a-3142665adf9f.png)
-![2022-08-24_02-35](https://user-images.githubusercontent.com/64464369/186250910-54a75794-739a-4b14-a355-76061cd51a76.png)
-![2022-08-24_02-36](https://user-images.githubusercontent.com/64464369/186250930-964beaff-0145-4d65-9369-db61b58e07a7.png)
