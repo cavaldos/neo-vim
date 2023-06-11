@@ -22,9 +22,9 @@
 :warning: Backup your configuration before installation
 
 ```bash
-$ cd $HOME && git clone https://github.com/phamhiep2506/dotfiles
-$ cd dotfiles
-$ ./install.sh
+$ git clone https://github.com/cavaldos/k-vim
+$ cd k-vim
+$ ./install-k.sh
 ```
 
 ## Auto install dependence
