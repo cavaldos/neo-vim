@@ -23,7 +23,7 @@
 
 ```bash
 $ git clone https://github.com/cavaldos/k-vim
-$ cd k-vim
+$ cd k-nvim
 $ ./install-k.sh
 ```
 
