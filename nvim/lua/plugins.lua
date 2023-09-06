@@ -1,6 +1,12 @@
 require("lazy").setup({ -- gruvbox-material
-"sainnhe/gruvbox-material", -- nvim-web-devicons
+"olimorris/onedarkpro.nvim", -- nvim-web-devicons
 "nvim-tree/nvim-web-devicons", -- vim-surround
+{
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    dependencies = {"nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+    "MunifTanjim/nui.nvim"}
+}, ---
 "tpope/vim-surround", -- vim-repeat
 "tpope/vim-repeat", -- vim-easy-align
 "junegunn/vim-easy-align", -- illuminate
@@ -36,7 +42,13 @@ require("lazy").setup({ -- gruvbox-material
     config = function()
         require("luasnip.loaders.from_vscode").lazy_load()
     end
-}, {
+}, --
+'numtostr/FTerm.nvim', -- 
+"voldikss/vim-floaterm", --
+"stevearc/aerial.nvim", --
+"rebelot/heirline.nvim", --
+"glepnir/galaxyline.nvim", --
+{
     -- nvim-tree.lua
     "nvim-tree/nvim-tree.lua",
     config = function()
