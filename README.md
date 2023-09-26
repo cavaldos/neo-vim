@@ -22,8 +22,8 @@
 :warning: Backup your configuration before installation
 
 ```bash
-$ git clone https://github.com/cavaldos/k-vim
-$ cd k-nvim
+$ git clone https://github.com/cavaldos/neo-vim
+$ cd neo-vim
 $ ./install-k.sh
 ```
 
