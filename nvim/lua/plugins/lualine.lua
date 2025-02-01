@@ -1,113 +1,127 @@
 return {
-	"nvim-lualine/lualine.nvim",
-	lazy = false,
-	priority = 1000,
-	config = function()
-		local colors = {
-			blue = "#80a0ff",
-			cyan = "#79dac8",
-			black = "#080808",
-			white = "#c6c6c6",
-			red = "#ff5189",
-			violet = "#d183e8",
-			grey = "#303030",
-		}
+  "nvim-lualine/lualine.nvim",
+  config = function()
+    local configuration = vim.fn["gruvbox_material#get_configuration"]()
+    local palette = vim.fn["gruvbox_material#get_palette"](
+      configuration.background,
+      configuration.foreground,
+      configuration.colors_override
+    )
 
-		local bubbles_theme = {
-			normal = {
-				a = {
-					fg = colors.black,
-					bg = colors.violet,
-				},
-				b = {
-					fg = colors.white,
-					bg = colors.grey,
-				},
-				c = {
-					fg = colors.white,
-				},
-			},
+    local config = {
+      options = {
+        component_separators = "",
+        section_separators = "",
+        theme = {
+          normal = { c = { bg = palette.bg0[1], fg = palette.fg0[1] } },
+          inactive = { c = { bg = palette.bg0[1], fg = palette.fg0[1] } },
+        },
+      },
+      sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_y = {},
+        lualine_z = {},
+        lualine_x = {},
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_y = {},
+        lualine_z = {},
+        lualine_x = {},
+      },
+    }
 
-			insert = {
-				a = {
-					fg = colors.black,
-					bg = colors.blue,
-				},
-			},
-			visual = {
-				a = {
-					fg = colors.black,
-					bg = colors.cyan,
-				},
-			},
-			replace = {
-				a = {
-					fg = colors.black,
-					bg = colors.red,
-				},
-			},
+    local function ins_left(component)
+      table.insert(config.sections.lualine_c, component)
+    end
 
-			inactive = {
-				a = {
-					fg = colors.white,
-					bg = colors.black,
-				},
-				b = {
-					fg = colors.white,
-					bg = colors.black,
-				},
-				c = {
-					fg = colors.white,
-				},
-			},
-		}
+    local function ins_right(component)
+      table.insert(config.sections.lualine_x, component)
+    end
 
-		require("lualine").setup({
-			options = {
-				theme = bubbles_theme,
-				component_separators = "",
-				section_separators = {
-					left = "",
-					right = "",
-				},
-			},
-			sections = {
-				lualine_a = {
-					{
-						"mode",
-						separator = {
-							left = "",
-						},
-						right_padding = 2,
-					},
-				},
-				lualine_b = { "filename", "branch" },
-				lualine_c = {
-					"%=" --[[ add your center components here in place of this comment ]],
-					
-				},
-				lualine_x = {},
-				lualine_y = { "filetype", "progress" },
-				lualine_z = {
-					{
-						"location",
-						separator = {
-							right = "",
-						},
-						left_padding = 2,
-					},
-				},
-			},
-			inactive_sections = {
-				lualine_a = { "filename" },
-				lualine_b = {},
-				lualine_c = {},
-				lualine_x = {},
-				lualine_y = {},
-				lualine_z = { "location" },
-			},
-			tabline = {},
-			extensions = {},
-		})
-	end,
+    ins_left({
+      function()
+        return "▊"
+      end,
+      color = { fg = palette.blue[1] },
+      padding = { left = 0, right = 1 },
+    })
+
+    ins_left({
+      function()
+        return ""
+      end,
+      color = function()
+        local mode_color = {
+          n = palette.red[1],
+          i = palette.green[1],
+          v = palette.blue[1],
+          [""] = palette.blue[1],
+          V = palette.blue[1],
+          c = palette.purple[1],
+          no = palette.red[1],
+          s = palette.orange[1],
+          S = palette.orange[1],
+          [""] = palette.orange[1],
+          ic = palette.yellow[1],
+          R = palette.purple[1],
+          Rv = palette.purple[1],
+          cv = palette.red[1],
+          ce = palette.red[1],
+          r = palette.aqua[1],
+          rm = palette.aqua[1],
+          ["r?"] = palette.aqua[1],
+          ["!"] = palette.red[1],
+          t = palette.red[1],
+        }
+        return { fg = mode_color[vim.fn.mode()] }
+      end,
+      padding = { right = 1 },
+    })
+
+    ins_left({
+      "filename",
+      color = { fg = palette.purple[1], gui = "bold" },
+    })
+
+    ins_left({
+      "diagnostics",
+      sources = { "nvim_diagnostic" },
+      symbols = { error = " ", warn = " ", hint = " ", info = " " },
+    })
+
+    ins_right({
+      "branch",
+      icon = "",
+      color = { fg = palette.red[1], gui = "bold" },
+    })
+
+    ins_right({
+      "diff",
+      symbols = { added = " ", modified = " ", removed = " " },
+    })
+
+    ins_right({ "filetype" })
+
+    ins_right({ "location" })
+
+    ins_right({
+      "progress",
+      color = { fg = palette.fg1[1], gui = "bold" },
+    })
+
+    ins_right({
+      function()
+        return "▊"
+      end,
+      color = { fg = palette.blue[1] },
+      padding = { left = 0 },
+    })
+
+    require("lualine").setup(config)
+  end,
 }
