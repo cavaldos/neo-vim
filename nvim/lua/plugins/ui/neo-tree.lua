@@ -50,8 +50,13 @@ return {
             },
             window = {
                 position = "left",
-                width = 30
+                width = 30,
+                mappings_options = {
+                    noremap = true,
+                    nowait = true
+                },
             },
+            -- separator_target = vim.api.nvim_win_get_width(0) * 0.1,
             default_component_configs = {
                 icon = {
                     folder_closed = "",

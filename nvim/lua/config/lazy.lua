@@ -8,11 +8,12 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Load config
 require("config.options")
-require("config.autocmds")
+-- require("config.autocmds")
 require("config.keymaps")
 
 -- Lazy.nvim
-require("lazy").setup({{
-    import = "plugins"
-}})
+require("lazy").setup({
+    { import = "plugins.core" },
+    { import = "plugins.ui" },
+})
 

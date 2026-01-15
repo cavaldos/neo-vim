@@ -1,0 +1,298 @@
+return {}
+-- return {
+--     "rebelot/heirline.nvim",
+--     dependencies = {
+--         "nvim-tree/nvim-web-devicons",
+--     },
+--     lazy = false,
+--     priority = 1000,
+--     config = function()
+--         local heirline = require("heirline")
+--         local utils = require("heirline.utils")
+
+--         -- Colors
+--         local colors = {
+--             bg = "#1e1e2e",
+--             fg = "#cdd6f4",
+--             bg_dark = "#181825",
+--             blue = "#89b4fa",
+--             green = "#a6e3a1",
+--             red = "#f38ba8",
+--             yellow = "#f9e2af",
+--             orange = "#fab387",
+--             purple = "#cba6f7",
+--             cyan = "#94e2d5",
+--             gray = "#6c7086",
+--         }
+
+--         -- Cập nhật màu từ colorscheme
+--         vim.api.nvim_create_autocmd("ColorScheme", {
+--             callback = function()
+--                 colors.bg = utils.get_highlight("Normal").bg or colors.bg
+--                 colors.fg = utils.get_highlight("Normal").fg or colors.fg
+--                 colors.green = utils.get_highlight("String").fg or colors.green
+--                 colors.red = utils.get_highlight("DiagnosticError").fg or colors.red
+--                 colors.yellow = utils.get_highlight("DiagnosticWarn").fg or colors.yellow
+--                 colors.gray = utils.get_highlight("Comment").fg or colors.gray
+--             end,
+--         })
+
+--         -- Copilot state
+--         vim.g.copilot_enabled = true
+--         vim.g.cmp_enabled = true
+
+--         -- ============== TABLINE COMPONENTS ==============
+
+--         -- Offset cho Neo-tree
+--         local TablineOffset = {
+--             condition = function(self)
+--                 local win = vim.api.nvim_tabpage_list_wins(0)[1]
+--                 local bufnr = vim.api.nvim_win_get_buf(win)
+--                 self.winid = win
+--                 local ft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+--                 if ft == "neo-tree" then
+--                     self.title = "File Explorer"
+--                     return true
+--                 end
+--                 return false
+--             end,
+--             provider = function(self)
+--                 local title = self.title
+--                 local width = vim.api.nvim_win_get_width(self.winid)
+--                 local pad = math.ceil((width - #title) / 2)
+--                 return string.rep(" ", pad) .. title .. string.rep(" ", pad)
+--             end,
+--             hl = { fg = colors.cyan, bg = colors.bg_dark, bold = true },
+--         }
+
+--         local TablineFileName = {
+--             provider = function(self)
+--                 local filename = self.filename
+--                 filename = filename == "" and "[No Name]" or vim.fn.fnamemodify(filename, ":t")
+--                 return filename
+--             end,
+--             hl = function(self)
+--                 return { fg = self.is_active and colors.fg or colors.gray, bold = self.is_active }
+--             end,
+--         }
+
+--         local TablineFileFlags = {
+--             {
+--                 condition = function(self)
+--                     return vim.api.nvim_get_option_value("modified", { buf = self.bufnr })
+--                 end,
+--                 provider = " ●",
+--                 hl = { fg = colors.yellow },
+--             },
+--             {
+--                 condition = function(self)
+--                     return not vim.api.nvim_get_option_value("modifiable", { buf = self.bufnr })
+--                         or vim.api.nvim_get_option_value("readonly", { buf = self.bufnr })
+--                 end,
+--                 provider = " ",
+--                 hl = { fg = colors.orange },
+--             },
+--         }
+
+--         local TablineFileIcon = {
+--             init = function(self)
+--                 local filename = self.filename
+--                 local extension = vim.fn.fnamemodify(filename, ":e")
+--                 self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(
+--                     filename,
+--                     extension,
+--                     { default = true }
+--                 )
+--             end,
+--             provider = function(self)
+--                 return self.icon and (self.icon .. " ")
+--             end,
+--             hl = function(self)
+--                 return { fg = self.icon_color }
+--             end,
+--         }
+
+--         -- Close button cho mỗi buffer
+--         local TablineCloseButton = {
+--             provider = " 󰅖",
+--             hl = function(self)
+--                 return { fg = self.is_active and colors.red or colors.gray }
+--             end,
+--             on_click = {
+--                 callback = function(_, minwid)
+--                     vim.schedule(function()
+--                         vim.api.nvim_buf_delete(minwid, { force = false })
+--                         vim.cmd.redrawtabline()
+--                     end)
+--                 end,
+--                 minwid = function(self)
+--                     return self.bufnr
+--                 end,
+--                 name = "heirline_tabline_close_buffer",
+--             },
+--         }
+
+--         -- Buffer block
+--         local TablineBufferBlock = {
+--             init = function(self)
+--                 self.filename = vim.api.nvim_buf_get_name(self.bufnr)
+--             end,
+--             hl = function(self)
+--                 if self.is_active then
+--                     return { bg = colors.bg }
+--                 else
+--                     return { bg = colors.bg_dark }
+--                 end
+--             end,
+--             on_click = {
+--                 callback = function(_, minwid)
+--                     vim.api.nvim_win_set_buf(0, minwid)
+--                 end,
+--                 minwid = function(self)
+--                     return self.bufnr
+--                 end,
+--                 name = "heirline_tabline_buffer",
+--             },
+--             { provider = " " },
+--             TablineFileIcon,
+--             TablineFileName,
+--             TablineFileFlags,
+--             TablineCloseButton,
+--             { provider = "  " },
+--         }
+
+--         -- Buffer list
+--         local BufferLine = utils.make_buflist(
+--             TablineBufferBlock,
+--             { provider = "", hl = { fg = colors.gray } },
+--             { provider = "", hl = { fg = colors.gray } }
+--         )
+
+--         -- ============== TOGGLE BUTTONS (Bên phải) ==============
+
+--         local Spacer = { provider = "%=" }
+
+--         -- CMP Toggle Button
+--         local CmpToggle = {
+--             provider = function()
+--                 if vim.g.cmp_enabled then
+--                     return "  󰞂 "
+--                 else
+--                     return "  󰞂 "
+--                 end
+--             end,
+--             hl = function()
+--                 if vim.g.cmp_enabled then
+--                     return { fg = "#1e1e2e", bg = colors.blue, bold = true }
+--                 else
+--                     return { fg = "#1e1e2e", bg = colors.gray, bold = true }
+--                 end
+--             end,
+--             on_click = {
+--                 callback = function()
+--                     vim.schedule(function()
+--                         if vim.g.cmp_enabled then
+--                             require("cmp").setup({ enabled = false })
+--                             vim.g.cmp_enabled = false
+--                             vim.notify("󰞂 CMP disabled", vim.log.levels.WARN)
+--                         else
+--                             require("cmp").setup({ enabled = true })
+--                             vim.g.cmp_enabled = true
+--                             vim.notify("󰞂 CMP enabled", vim.log.levels.INFO)
+--                         end
+--                         vim.cmd.redrawtabline()
+--                     end)
+--                 end,
+--                 name = "heirline_cmp_toggle",
+--             },
+--         }
+
+--         -- Copilot Toggle Button
+--         local CopilotToggle = {
+--             provider = function()
+--                 if vim.g.copilot_enabled then
+--                     return "   "
+--                 else
+--                     return "   "
+--                 end
+--             end,
+--             hl = function()
+--                 if vim.g.copilot_enabled then
+--                     return { fg = "#1e1e2e", bg = colors.green, bold = true }
+--                 else
+--                     return { fg = "#1e1e2e", bg = colors.red, bold = true }
+--                 end
+--             end,
+--             on_click = {
+--                 callback = function()
+--                     vim.schedule(function()
+--                         if vim.g.copilot_enabled then
+--                             vim.cmd("Copilot disable")
+--                             vim.g.copilot_enabled = false
+--                             vim.notify(" Copilot disabled", vim.log.levels.WARN)
+--                         else
+--                             vim.cmd("Copilot enable")
+--                             vim.g.copilot_enabled = true
+--                             vim.notify(" Copilot enabled", vim.log.levels.INFO)
+--                         end
+--                         vim.cmd.redrawtabline()
+--                     end)
+--                 end,
+--                 name = "heirline_copilot_toggle",
+--             },
+--         }
+
+--         -- Close button (đóng buffer hiện tại)
+--         local CloseButton = {
+--             provider = " 󰅖 ",
+--             hl = { fg = colors.red, bg = colors.bg_dark },
+--             on_click = {
+--                 callback = function()
+--                     vim.schedule(function()
+--                         local bufnr = vim.api.nvim_get_current_buf()
+--                         vim.api.nvim_buf_delete(bufnr, { force = false })
+--                         vim.cmd.redrawtabline()
+--                     end)
+--                 end,
+--                 name = "heirline_close_current",
+--             },
+--         }
+
+--         -- ============== FULL TABLINE ==============
+
+--         local TabLine = {
+--             TablineOffset,
+--             BufferLine,
+--             Spacer,
+--             CmpToggle,
+--             CopilotToggle,
+--             CloseButton,
+--         }
+
+--         -- ============== SETUP ==============
+
+--         heirline.setup({
+--             tabline = TabLine,
+--         })
+
+--         -- Keymaps cho buffer navigation
+--         vim.keymap.set("n", "<A-.>", "<CMD>bnext<CR>", { desc = "Next buffer" })
+--         vim.keymap.set("n", "<A-,>", "<CMD>bprev<CR>", { desc = "Previous buffer" })
+--         vim.keymap.set("n", "<A-c>", "<CMD>bdelete<CR>", { desc = "Close buffer" })
+--         vim.keymap.set("n", "<leader>cp", function()
+--             if vim.g.copilot_enabled then
+--                 vim.cmd("Copilot disable")
+--                 vim.g.copilot_enabled = false
+--                 vim.notify(" Copilot disabled", vim.log.levels.WARN)
+--             else
+--                 vim.cmd("Copilot enable")
+--                 vim.g.copilot_enabled = true
+--                 vim.notify(" Copilot enabled", vim.log.levels.INFO)
+--             end
+--             vim.cmd.redrawtabline()
+--         end, { desc = "Toggle Copilot" })
+
+--         -- Luôn hiển thị tabline
+--         vim.opt.showtabline = 2
+--     end,
+-- }
