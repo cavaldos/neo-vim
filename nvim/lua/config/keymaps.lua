@@ -58,3 +58,12 @@ vim.keymap.set('n', '<leader>tb', function()
     print("Background: OFF (system colors)")
   end
 end, { desc = 'Toggle background transparency' })
+
+-- Telescope theme picker 
+vim.keymap.set("n", "<leader>tn", "<cmd>Telescope themes<cr>", { desc = "Choose theme" })
+
+-- Buffer navigation
+vim.keymap.set("n", "L", "<cmd>bnext<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "H", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })

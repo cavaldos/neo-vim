@@ -51,6 +51,10 @@ return {
             window = {
                 position = "left",
                 width = 30,
+                mappings = {
+                    -- Vô hiệu hóa Backspace mở rộng folder
+                    ["<bs>"] = "noop",
+                },
                 mappings_options = {
                     noremap = true,
                     nowait = true

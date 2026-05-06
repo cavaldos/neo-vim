@@ -1,13 +1,13 @@
 return {
     "nvim-lua/plenary.nvim",
 
-    -- {
-    --     "nvchad/ui",
-    --     dependencies = { "nvim-tree/nvim-web-devicons" },
-    --     config = function()
-    --         require("nvchad")
-    --     end,
-    -- },
+    {
+        "nvchad/ui",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require("nvchad")
+        end,
+    },
 
     {
         "nvchad/base46",
