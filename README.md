@@ -3,6 +3,10 @@
 Custom Neovim configuration for macOS with NVChad-style UI and AI assistance.
 
 ![Screenshot](./screenshort/1.png)
+![Screenshot](./screenshort/2.png)
+![Screenshot](./screenshort/3.png)
+![Screenshot](./screenshort/4.png)
+
 
 ## Installation
 
@@ -16,6 +20,16 @@ mv ~/.config/nvim ~/.config/nvim-backup
 
 # Copy new config
 cp -r ./nvim ~/.config/nvim
+```
+
+## Uninstallation
+
+```bash
+# Remove config
+rm -rf ~/.config/nvim
+rm -rf ~/.local/state/nvim
+rm -rf ~/.local/share/nvim
+rm -rf ~/.cache/nvim
 ```
 
 Launch Neovim - Lazy will automatically install all plugins.
