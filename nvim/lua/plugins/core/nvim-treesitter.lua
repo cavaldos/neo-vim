@@ -25,6 +25,7 @@ return {
   build = ":TSUpdate",
   config = function()
     local treesitter = require("nvim-treesitter")
+    local treesitterHelper = require("config.treesitter")
     local parsers = {
       "lua",
       "vim",
@@ -42,6 +43,7 @@ return {
       "yaml",
       "toml",
       "markdown",
+      "markdown_inline",
       "html",
       "css",
     }
@@ -51,6 +53,7 @@ return {
     })
 
     treesitter.install(parsers)
+    treesitterHelper.ensureParsers(parsers)
 
     vim.api.nvim_create_autocmd("FileType", {
       callback = function(args)
@@ -61,7 +64,7 @@ return {
           return
         end
 
-        pcall(vim.treesitter.start, args.buf)
+        treesitterHelper.startBuffer(args.buf)
       end,
     })
   end,
