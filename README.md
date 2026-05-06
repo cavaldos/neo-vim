@@ -8,8 +8,9 @@ Custom Neovim configuration for macOS with NVChad-style UI and AI assistance.
 
 ```bash
 # Clone repo
-git clone https://github.com/cavaldos/neo-vim ~/.config/nvim
+git clone https://github.com/cavaldos/neo-vim 
 
+cd neo-vim
 # Backup old config (if exists)
 mv ~/.config/nvim ~/.config/nvim-backup
 
