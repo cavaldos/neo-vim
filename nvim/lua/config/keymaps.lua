@@ -34,3 +34,27 @@ vim.keymap.set("n", "<LeftMouse>", function()
     end
   end, 10)
 end, { desc = "Click sign column to open diagnostics" })
+
+
+-- Copy messages to clipboard
+vim.keymap.set('n', '<leader>cm', function()
+  vim.cmd('redir @+ | messages | redir END')
+  print("✓ Copied messages to clipboard")
+end, { desc = 'Copy messages to clipboard' })
+
+-- Toggle background transparency (xóa màu background, hiện màu system)
+vim.keymap.set('n', '<leader>tb', function()
+  if vim.g.transparent_bg then
+    -- Restore background colors
+    vim.api.nvim_set_hl(0, "Normal", { bg = vim.g.original_bg })
+    vim.g.transparent_bg = false
+    print("Background: ON")
+  else
+    -- Store original background and set to transparent
+    local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = "Normal", link = false })
+    vim.g.original_bg = ok and hl.bg or nil
+    vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+    vim.g.transparent_bg = true
+    print("Background: OFF (system colors)")
+  end
+end, { desc = 'Toggle background transparency' })

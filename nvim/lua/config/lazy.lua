@@ -17,3 +17,13 @@ require("lazy").setup({
     { import = "plugins.ui" },
 })
 
+local base46_cache_ok, base46_cache_files = pcall(vim.fn.readdir, vim.g.base46_cache)
+if base46_cache_ok then
+    for _, file in ipairs(base46_cache_files) do
+        local cache_file = vim.g.base46_cache .. file
+        if vim.fn.filereadable(cache_file) == 1 then
+            dofile(cache_file)
+        end
+    end
+end
+

@@ -128,7 +128,7 @@ return {
                 lualine_a = {
                     -- Margin trái
                     {
-                        function() return '  ' end,
+                        function() return '' end,
                         padding = 0,
                         color = { bg = 'NONE', fg = 'NONE' },
                     },
@@ -244,20 +244,21 @@ return {
                     
                 },
                 lualine_z = {
-                    { '%l:%c', padding = { left = 1, right = 1 } },
-                    { '%p%%/%L', padding = { left = 1, right = 1 } },
                     -- icon gear setting
                     {
-                        function() return ' ' end,
+                        function() return '  ' end,
                         padding = { left = 1, right = 0 },
                         color = function()
                             local c = get_colors()
                             return { fg = c.yellow, bg = c.black }
                         end,
                     },
+                    { '%l:%c', padding = { left = 1, right = 1 } },
+                    { '%p%%/%L', padding = { left = 1, right = 1 } },
+
                     -- Margin phải
                     {
-                        function() return '  ' end,
+                        function() return '' end,
                         padding = 0,
                         color = { bg = 'NONE', fg = 'NONE' },
                     },

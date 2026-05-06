@@ -12,7 +12,7 @@ return {
 
     require("mason-lspconfig").setup({
       ensure_installed = {
-        "clangd",        -- C/C++
+        -- "clangd",        -- C/C++
         "rust_analyzer", -- Rust
         "ts_ls",         -- JavaScript/TypeScript/React
         "eslint",        -- ESLint for React/TypeScript
