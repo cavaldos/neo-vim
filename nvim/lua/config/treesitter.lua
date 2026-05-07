@@ -264,19 +264,34 @@ local function installParser(language)
   end)
 end
 
-function M.ensureParser(language)
+function M.hasParser(language)
   local parserAvailable, source = hasParser(language)
-  if parserAvailable then
-    if source == "system" then
-      notifyOnce(
-        string.format(
-          "Treesitter parser '%s' is using the system fallback because no local plugin parser is available.",
-          language
-        ),
-        vim.log.levels.INFO
-      )
-    end
+  if parserAvailable and source == "system" then
+    notifyOnce(
+      string.format(
+        "Treesitter parser '%s' is using the system fallback because no local plugin parser is available.",
+        language
+      ),
+      vim.log.levels.INFO
+    )
+  end
 
+  return parserAvailable
+end
+
+function M.bufferHasParser(bufnr)
+  local filetype = vim.bo[bufnr].filetype
+  if filetype == "" then
+    return false
+  end
+
+  local language = resolveLanguage(filetype)
+  return M.hasParser(language)
+end
+
+function M.ensureParser(language)
+  local parserAvailable = M.hasParser(language)
+  if parserAvailable then
     return true
   end
 

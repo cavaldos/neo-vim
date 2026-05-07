@@ -1,12 +1,41 @@
+local notified_render_markdown_disabled = false
+
+local function notify_render_markdown_disabled()
+    if notified_render_markdown_disabled then
+        return
+    end
+
+    notified_render_markdown_disabled = true
+    vim.schedule(function()
+        vim.notify(
+            "Không có Treesitter parser cho markdown, đã tắt render-markdown.",
+            vim.log.levels.INFO,
+            { title = "Markdown" }
+        )
+    end)
+end
+
 return {
     {
         "MeanderingProgrammer/render-markdown.nvim",
         ft = { "markdown" },
-        config = function()
-            local treesitterHelper = require("config.treesitter")
+        enabled = function()
+            local ok, treesitterHelper = pcall(require, "config.treesitter")
+            if not ok then
+                notify_render_markdown_disabled()
+                return false
+            end
 
+            local has_parser = treesitterHelper.hasParser("markdown")
+            if has_parser then
+                return true
+            end
+
+            notify_render_markdown_disabled()
+            return false
+        end,
+        config = function()
             require("render-markdown").setup({
-                enabled = treesitterHelper.ensureParser("markdown"),
                 refresh = {
                     enabled = true,
                     interval = 200,
