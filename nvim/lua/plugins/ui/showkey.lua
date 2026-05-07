@@ -4,7 +4,7 @@ return {
   opts = {
     timeout = 1,
     maxkeys = 5,
-    -- more opts alway on
-    always_on = true,
+    -- disable always-on to avoid stale float callbacks
+    always_on = false,
   }
 }
