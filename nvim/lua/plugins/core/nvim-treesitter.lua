@@ -24,7 +24,18 @@ return {
   lazy = false,
   build = ":TSUpdate",
   config = function()
-    local treesitter = require("nvim-treesitter")
+    local okTreesitter, treesitter = pcall(require, "nvim-treesitter")
+    if not okTreesitter then
+      vim.schedule(function()
+        vim.notify(
+          string.format("Failed to load nvim-treesitter: %s", tostring(treesitter)),
+          vim.log.levels.ERROR,
+          { title = "Treesitter" }
+        )
+      end)
+      return
+    end
+
     local treesitterHelper = require("config.treesitter")
     local parsers = {
       "lua",
@@ -48,11 +59,32 @@ return {
       "css",
     }
 
-    treesitter.setup({
+    local okSetup, setupError = pcall(treesitter.setup, {
       install_dir = vim.fn.stdpath("data") .. "/site",
     })
+    if not okSetup then
+      vim.schedule(function()
+        vim.notify(
+          string.format("Treesitter setup failed: %s", tostring(setupError)),
+          vim.log.levels.WARN,
+          { title = "Treesitter" }
+        )
+      end)
+    end
 
-    treesitter.install(parsers)
+    if type(treesitter.install) == "function" then
+      local okInstall, installError = pcall(treesitter.install, parsers)
+      if not okInstall then
+        vim.schedule(function()
+          vim.notify(
+            string.format("Treesitter bulk install could not start: %s", tostring(installError)),
+            vim.log.levels.WARN,
+            { title = "Treesitter" }
+          )
+        end)
+      end
+    end
+
     treesitterHelper.ensureParsers(parsers)
 
     vim.api.nvim_create_autocmd("FileType", {

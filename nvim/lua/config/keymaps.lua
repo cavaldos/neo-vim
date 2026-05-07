@@ -67,3 +67,5 @@ vim.keymap.set("n", "L", "<cmd>bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "H", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 vim.keymap.set("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+
+vim.keymap.set("n", "<leader>uh", "<cmd>nohlsearch<CR>")

@@ -4,6 +4,7 @@ return {
   opts = {
     timeout = 1,
     maxkeys = 5,
-    -- more opts
+    -- more opts alway on
+    always_on = true,
   }
 }

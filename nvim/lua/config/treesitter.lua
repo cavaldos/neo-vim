@@ -39,6 +39,34 @@ local function hasTreeSitterCli()
   return vim.fn.executable("tree-sitter") == 1
 end
 
+local function errorMessageText(error)
+  if type(error) == "string" then
+    return error
+  end
+
+  return tostring(error)
+end
+
+local function isMissingCliError(error)
+  local message = errorMessageText(error):lower()
+
+  return message:match("enoent") ~= nil
+    or message:match("tree%-sitter") ~= nil
+    or message:match("not found") ~= nil
+    or message:match("executable") ~= nil
+end
+
+local function isMissingParserError(error)
+  local message = errorMessageText(error):lower()
+
+  return message:match("no parser") ~= nil
+    or message:match("cannot find parser") ~= nil
+    or message:match("parser.*not available") ~= nil
+    or message:match("parser.*missing") ~= nil
+    or message:match("invalid node type") ~= nil
+    or message:match("query error") ~= nil
+end
+
 local function resolveLanguage(filetype)
   local ok, language = pcall(vim.treesitter.language.get_lang, filetype)
   if not ok or type(language) ~= "string" or language == "" then
@@ -136,6 +164,23 @@ local function installParser(language)
     return
   end
 
+  local okModule, treesitter = pcall(require, "nvim-treesitter")
+  if not okModule then
+    notifyOnce(
+      string.format("Failed to load nvim-treesitter while installing '%s': %s", language, errorMessageText(treesitter)),
+      vim.log.levels.ERROR
+    )
+    return
+  end
+
+  if type(treesitter.install) ~= "function" then
+    notifyOnce(
+      string.format("nvim-treesitter install API is unavailable for parser '%s'.", language),
+      vim.log.levels.ERROR
+    )
+    return
+  end
+
   parserInstallInFlight[language] = true
 
   notifyOnce(
@@ -146,16 +191,46 @@ local function installParser(language)
     vim.log.levels.WARN
   )
 
-  local ok, installResult = pcall(require("nvim-treesitter").install, language)
-  if not ok then
+  local okInstall, installResult = pcall(treesitter.install, language)
+  if not okInstall then
     parserInstallInFlight[language] = nil
+
+    if isMissingCliError(installResult) then
+      notifyMissingCli(language)
+      return
+    end
+
     notifyOnce(
       string.format(
         "Failed to start Treesitter parser installation for '%s': %s",
         language,
-        tostring(installResult)
+        errorMessageText(installResult)
       ),
       vim.log.levels.ERROR
+    )
+    return
+  end
+
+  if type(installResult) ~= "table" or type(installResult.await) ~= "function" then
+    parserInstallInFlight[language] = nil
+
+    if hasParser(language) then
+      notifyOnce(
+        string.format(
+          "Treesitter parser '%s' was installed successfully. Reopen the file if highlighting does not refresh automatically.",
+          language
+        ),
+        vim.log.levels.INFO
+      )
+      return
+    end
+
+    notifyOnce(
+      string.format(
+        "Treesitter parser '%s' installation was started, but Neovim could not track completion on this version. Reopen the file after installation finishes.",
+        language
+      ),
+      vim.log.levels.WARN
     )
     return
   end
@@ -164,8 +239,7 @@ local function installParser(language)
     parserInstallInFlight[language] = nil
 
     if error ~= nil then
-      local message = tostring(error)
-      if message:match("ENOENT") or message:match("tree%-sitter") then
+      if isMissingCliError(error) then
         notifyMissingCli(language)
         return
       end
@@ -234,10 +308,18 @@ function M.startBuffer(bufnr)
     return true
   end
 
-  local message = errorMessage
-  if type(message) ~= "string" then
-    message = tostring(message)
+  if isMissingParserError(errorMessage) then
+    installParser(language)
+    notifyMissingParser(language)
+    return false
   end
+
+  if isMissingCliError(errorMessage) then
+    notifyMissingCli(language)
+    return false
+  end
+
+  local message = errorMessageText(errorMessage)
 
   notifyOnce(
     string.format(
