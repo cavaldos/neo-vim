@@ -2,10 +2,10 @@
 
 Custom Neovim configuration for macOS with NVChad-style UI and AI assistance.
 
-![Screenshot](./screenshort/1.png)
-![Screenshot](./screenshort/2.png)
-![Screenshot](./screenshort/3.png)
-![Screenshot](./screenshort/4.png)
+![Screenshot](./screenshots/1.png)
+![Screenshot](./screenshots/2.png)
+![Screenshot](./screenshots/3.png)
+![Screenshot](./screenshots/4.png)
 
 
 ## Installation
