@@ -73,6 +73,48 @@ local function toggle_visual_block_comment()
   api.locked("toggle.blockwise")(vim.fn.visualmode())
 end
 
+local function uncomment_visual_line()
+  local api = require("Comment.api")
+  api.locked("uncomment.linewise")(vim.fn.visualmode())
+end
+
+local function uncomment_visual_block()
+  local api = require("Comment.api")
+  api.locked("uncomment.blockwise")(vim.fn.visualmode())
+end
+
+local function copy_visual_selection()
+  vim.cmd('normal! "+y')
+end
+
+local function paste_after_cursor()
+  vim.cmd('normal! "+p')
+end
+
+local function paste_before_cursor()
+  vim.cmd('normal! "+P')
+end
+
+local function cut_visual_selection()
+  vim.cmd('normal! "+d')
+end
+
+local function delete_visual_selection()
+  vim.cmd('normal! "_d')
+end
+
+local function open_floaterm()
+  vim.cmd("FloatermToggle")
+end
+
+local function undo_change()
+  vim.cmd("undo")
+end
+
+local function redo_change()
+  vim.cmd("redo")
+end
+
 -- ─────────────────────────────────────────────
 -- Main Menu (matches image 2 left panel)
 -- ─────────────────────────────────────────────
@@ -103,6 +145,34 @@ local main_menu = {
     name = "Comment Block",
     cmd = require("Comment.api").toggle.blockwise.current,
     rtxt = "<leader>cb",
+  },
+  { name = "separator" },
+  {
+    name = "Undo",
+    cmd = undo_change,
+    rtxt = "u",
+  },
+  {
+    name = "Redo",
+    cmd = redo_change,
+    rtxt = "<C-r>",
+  },
+  {
+    name = "Copy Line",
+    cmd = function()
+      vim.cmd('normal! "+yy')
+    end,
+    rtxt = "yy",
+  },
+  {
+    name = "Paste After Cursor",
+    cmd = paste_after_cursor,
+    rtxt = "p",
+  },
+  {
+    name = "Paste Before Cursor",
+    cmd = paste_before_cursor,
+    rtxt = "P",
   },
   { name = "separator" },
   {
@@ -148,9 +218,8 @@ local main_menu = {
   { name = "separator" },
   {
     name = "Open in Terminal",
-    cmd = function()
-      vim.cmd("terminal")
-    end,
+    cmd = open_floaterm,
+    rtxt = "<F1>",
   },
 }
 
@@ -230,10 +299,8 @@ local filetree_menu = {
   { name = "separator" },
   {
     name = "Open in Terminal",
-    cmd = function()
-      vim.cmd("lcd " .. vim.fn.expand("%:p:h"))
-      vim.cmd("terminal")
-    end,
+    cmd = open_floaterm,
+    rtxt = "<F1>",
   },
   { name = "separator" },
   {
@@ -275,27 +342,66 @@ local filetree_menu = {
 -- ─────────────────────────────────────────────
 local visual_menu = {
   {
-    name = "Comment Selection",
+    name = "Comment Code",
     cmd = toggle_visual_line_comment,
     rtxt = "<leader>cc",
   },
   {
-    name = "Block Comment Selection",
+    name = "Uncomment Code",
+    cmd = uncomment_visual_line,
+    rtxt = "<leader>cu",
+  },
+  {
+    name = "Block Comment Code",
     cmd = toggle_visual_block_comment,
     rtxt = "<leader>cb",
+  },
+  {
+    name = "Block Uncomment Code",
+    cmd = uncomment_visual_block,
+    rtxt = "<leader>bu",
+  },
+  { name = "separator" },
+  {
+    name = "Undo",
+    cmd = undo_change,
+    rtxt = "u",
+  },
+  {
+    name = "Redo",
+    cmd = redo_change,
+    rtxt = "<C-r>",
+  },
+  {
+    name = "Copy Selection",
+    cmd = copy_visual_selection,
+    rtxt = "y",
+  },
+  {
+    name = "Cut Selection",
+    cmd = cut_visual_selection,
+    rtxt = "x",
+  },
+  {
+    name = "Delete Selection",
+    cmd = delete_visual_selection,
+    rtxt = "d",
+  },
+  {
+    name = "Paste After Cursor",
+    cmd = paste_after_cursor,
+    rtxt = "p",
+  },
+  {
+    name = "Paste Before Cursor",
+    cmd = paste_before_cursor,
+    rtxt = "P",
   },
   { name = "separator" },
   {
     name = "Code Actions",
     cmd = vim.lsp.buf.code_action,
     rtxt = "<leader>ca",
-  },
-  {
-    name = "Copy Selection",
-    cmd = function()
-      vim.cmd('normal! "*y')
-    end,
-    rtxt = "y",
   },
 }
 

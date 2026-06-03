@@ -1,11 +1,13 @@
 # neo-vim
 
-Custom Neovim configuration for macOS with NVChad-style UI and AI assistance.
 
 ![Screenshot](./screenshots/1.png)
 ![Screenshot](./screenshots/2.png)
 ![Screenshot](./screenshots/3.png)
 ![Screenshot](./screenshots/4.png)
+![Screenshot](./screenshots/5.png)
+![Screenshot](./screenshots/6.png)
+
 
 
 ## Installation
@@ -137,13 +139,31 @@ Launch Neovim - Lazy will automatically install all plugins.
 
 | Key | Action |
 |-----|--------|
-| `<leader>fz` | Files |
-| `<leader>g` | Ripgrep |
-| `<leader>b` | Buffers |
-| `<leader>h` | History |
-| `<leader>l` | Buffer lines |
-| `<leader>t` | Tags |
-| `<leader>m` | Marks |
+| `<leader>zf` | Files |
+| `<leader>zg` | Live grep (rg) |
+| `<leader>zG` | Git files |
+| `<leader>zs` | Git status files |
+| `<leader>za` | Grep (ag) |
+| `<leader>zb` | Buffers |
+| `<leader>zh` | Recent files |
+| `<leader>z;` | Command history |
+| `<leader>z/` | Search history |
+| `<leader>zl` | BLines |
+| `<leader>zz` | Lines (all buffers) |
+| `<leader>zt` | Tags |
+| `<leader>zT` | BTags |
+| `<leader>zm` | Marks |
+| `<leader>zq` | Quickfix |
+| `<leader>zw` | Windows |
+| `<leader>zj` | Jumps |
+| `<leader>zc` | Changes |
+| `<leader>ze` | Locate (system) |
+| `<leader>zk` | Keymaps |
+| `<leader>zo` | Commands |
+| `<leader>zn` | Snippets |
+| `<leader>zC` | Colorschemes |
+| `<leader>zF` | Filetypes |
+| `<leader>zH` | Help tags |
 
 ---
 

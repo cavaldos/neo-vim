@@ -10,7 +10,7 @@ return {
                 view = "cmdline_popup",
                 format = {
                     cmdline     = { pattern = "^:",         icon = ">",  lang = "vim" },
-                    search_down = { kind = "search", pattern = "^/",  icon = " ", lang = "regex" },
+                    -- search_down = { kind = "search", pattern = "^/",  icon = " ", lang = "regex" },
                     search_up   = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
                     filter      = { pattern = "^:%s*!",               icon = "$",  lang = "bash" },
                     lua         = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
@@ -54,20 +54,21 @@ return {
                         padding = { 0, 1 },
                     },
                     win_options = {
-                        winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+                        winblend = 10,
+                        winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual",
                     },
                 },
 
                 cmdline_popupmenu = {
                     relative = "editor",
-                    position = { row = "57%", col = "50%" },
-                    size     = { width = 60, height = "auto", max_height = 10 },
+                    position = { row = "85%", col = "50%" },
+                    size     = { width = 60, height = "auto", max_height = 20 },
                     border   = {
                         style   = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
                         padding = { 0, 1 },
                     },
                     win_options = {
-                        winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+                        winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
                         cursorline   = true,
                     },
                 },

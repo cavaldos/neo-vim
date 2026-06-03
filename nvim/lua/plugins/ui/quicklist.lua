@@ -106,44 +106,80 @@ end
 local plugins = {
   {
     text = "Telescope",
-    icon = " ",
+    icon = "󰭎 ",
     keybindings = {
-      { key = "<leader>ff", desc = "Find Files",           action = safe_cmd("Telescope find_files", "Telescope find_files") },
-      { key = "<leader>fg", desc = "Live Grep",            action = safe_cmd("Telescope live_grep", "Telescope live_grep") },
-      { key = "<leader>fb", desc = "Buffers",              action = safe_cmd("Telescope buffers", "Telescope buffers") },
-      { key = "<leader>fh", desc = "Help Tags",            action = safe_cmd("Telescope help_tags", "Telescope help_tags") },
-      { key = "<leader>fr", desc = "Recent Files",         action = safe_cmd("Telescope oldfiles", "Telescope oldfiles") },
-      { key = "<leader>fc", desc = "Commands",             action = safe_cmd("Telescope commands", "Telescope commands") },
-      { key = "<leader>fk", desc = "Keymaps",              action = safe_cmd("Telescope keymaps", "Telescope keymaps") },
-      { key = "<leader>fd", desc = "Diagnostics",          action = safe_cmd("Telescope diagnostics", "Telescope diagnostics") },
-      { key = "<leader>fs", desc = "Doc Symbols",          action = safe_cmd("Telescope lsp_document_symbols", "Telescope lsp_document_symbols") },
-      { key = "<leader>fw", desc = "Workspace Symbols",    action = safe_cmd("Telescope lsp_workspace_symbols", "Telescope lsp_workspace_symbols") },
-      { key = "<leader>ft", desc = "Treesitter Nodes",     action = safe_cmd("Telescope treesitter", "Telescope treesitter") },
-      { key = "<leader>fm", desc = "Marks",                action = safe_cmd("Telescope marks", "Telescope marks") },
-      { key = "<leader>fj", desc = "Jumplist",             action = safe_cmd("Telescope jumplist", "Telescope jumplist") },
+      -- File pickers
+      { key = "<leader>ff", desc = "Find Files",              action = safe_cmd("Telescope find_files", "Telescope find_files") },
+      { key = "<leader>fg", desc = "Live Grep",               action = safe_cmd("Telescope live_grep", "Telescope live_grep") },
+      { key = "<leader>fb", desc = "Buffers",                 action = safe_cmd("Telescope buffers", "Telescope buffers") },
+      { key = "<leader>fc", desc = "Commands",                action = safe_cmd("Telescope commands", "Telescope commands") },
+      { key = "<leader>fr", desc = "Recent Files",            action = safe_cmd("Telescope oldfiles", "Telescope oldfiles") },
+      { key = "<leader>fF", desc = "Git Files / Find Files",  action = safe_cmd("Telescope git_files", "Telescope git_files") },
+
+      -- Git pickers
+      { key = "<leader>gs", desc = "Git Status",              action = safe_cmd("Telescope git_status", "Telescope git_status") },
+      { key = "<leader>gC", desc = "Git Commits",             action = safe_cmd("Telescope git_commits", "Telescope git_commits") },
+      { key = "<leader>gc", desc = "Buffer Commits",          action = safe_cmd("Telescope git_bcommits", "Telescope git_bcommits") },
+      { key = "<leader>gb", desc = "Git Branches",            action = safe_cmd("Telescope git_branches", "Telescope git_branches") },
+      { key = "<leader>gS", desc = "Git Stash",               action = safe_cmd("Telescope git_stash", "Telescope git_stash") },
+
+      -- Theme
+      { key = "<leader>th", desc = "Choose Theme",            action = safe_cmd("Telescope colorscheme", "Telescope colorscheme") },
+
+      -- Diagnostics
+      { key = "<leader>ld", desc = "Document Diagnostics",    action = safe_cmd("Telescope diagnostics bufnr=0", "Telescope diagnostics") },
+      { key = "<leader>lD", desc = "Workspace Diagnostics",   action = safe_cmd("Telescope diagnostics", "Telescope diagnostics") },
+
+      -- LSP pickers
+      { key = "<leader>ls", desc = "Document Symbols",        action = safe_cmd("Telescope lsp_document_symbols", "Telescope lsp_document_symbols") },
+      { key = "<leader>lS", desc = "Workspace Symbols",       action = safe_cmd("Telescope lsp_workspace_symbols", "Telescope lsp_workspace_symbols") },
+      { key = "<leader>lr", desc = "References",              action = safe_cmd("Telescope lsp_references", "Telescope lsp_references") },
+      { key = "<leader>li", desc = "Implementations",         action = safe_cmd("Telescope lsp_implementations", "Telescope lsp_implementations") },
     },
   },
   {
     text = "FZF / fzf.vim",
-    icon = " ",
+    icon = " ",
     keybindings = {
-      { key = "<leader>zf", desc = "Files",                action = run_cmd_if_exists("Files") },
-      { key = "<leader>zg", desc = "Live Grep",            action = run_cmd_if_exists("Rg") },
-      { key = "<leader>zb", desc = "Buffers",              action = run_cmd_if_exists("Buffers") },
-      { key = "<leader>zh", desc = "Help Tags",            action = run_cmd_if_exists("Helptags") },
-      { key = "<leader>zr", desc = "Recent Files",         action = run_cmd_if_exists("History") },
-      { key = "<leader>zc", desc = "Commands",             action = run_cmd_if_exists("Commands") },
-      { key = "<leader>zk", desc = "Keymaps",              action = run_cmd_if_exists("Maps") },
-      { key = "<leader>zd", desc = "Diagnostics",          action = function() vim.diagnostic.setqflist(); safe_cmd("copen", "Open quickfix")() end },
-      { key = "<leader>zs", desc = "Doc Symbols",          action = function() vim.lsp.buf.document_symbol() end },
-      { key = "<leader>zm", desc = "Marks",                action = run_cmd_if_exists("Marks") },
-      { key = "<leader>zj", desc = "Jumps",                action = run_cmd_if_exists("Jumps") },
-      { key = "<leader>zt", desc = "Tags",                 action = run_cmd_if_exists("BTags", safe_cmd("tags", "Show tags")) },
+      -- Files & Search
+      { key = "<leader>zf", desc = "Files",              action = run_cmd_if_exists("Files") },
+      { key = "<leader>zg", desc = "Live Grep (rg)",     action = run_cmd_if_exists("Rg") },
+      { key = "<leader>zG", desc = "Git Files",          action = run_cmd_if_exists("GFiles") },
+      { key = "<leader>zs", desc = "Git Status Files",   action = run_cmd_if_exists("GFiles?") },
+      { key = "<leader>za", desc = "Grep (ag)",          action = run_cmd_if_exists("Ag") },
+
+      -- Buffers & History
+      { key = "<leader>zb", desc = "Buffers",            action = run_cmd_if_exists("Buffers") },
+      { key = "<leader>zh", desc = "Recent Files",       action = run_cmd_if_exists("History") },
+      { key = "<leader>z;", desc = "Command History",    action = run_cmd_if_exists("History:") },
+      { key = "<leader>z/", desc = "Search History",     action = run_cmd_if_exists("History/") },
+
+      -- Lines & Tags
+      { key = "<leader>zl", desc = "BLines",             action = run_cmd_if_exists("BLines") },
+      { key = "<leader>zz", desc = "Lines (all buf)",    action = run_cmd_if_exists("Lines") },
+      { key = "<leader>zt", desc = "Tags (project)",     action = run_cmd_if_exists("Tags") },
+      { key = "<leader>zT", desc = "BTags (buffer)",     action = run_cmd_if_exists("BTags") },
+
+      -- Vim Internals
+      { key = "<leader>zm", desc = "Marks",              action = run_cmd_if_exists("Marks") },
+      { key = "<leader>zq", desc = "Quickfix",           action = run_cmd_if_exists("Quickfix") },
+      { key = "<leader>zw", desc = "Windows",            action = run_cmd_if_exists("Windows") },
+      { key = "<leader>zj", desc = "Jumps",              action = run_cmd_if_exists("Jumps") },
+      { key = "<leader>zc", desc = "Changes",            action = run_cmd_if_exists("Changes") },
+      { key = "<leader>ze", desc = "Locate (system)",    action = run_cmd_if_exists("Locate .") },
+
+      -- Vim Config
+      { key = "<leader>zk", desc = "Keymaps",            action = run_cmd_if_exists("Maps") },
+      { key = "<leader>zo", desc = "Commands",           action = run_cmd_if_exists("Commands") },
+      { key = "<leader>zn", desc = "Snippets",           action = run_cmd_if_exists("Snippets") },
+      { key = "<leader>zC", desc = "Colorschemes",       action = run_cmd_if_exists("Colors") },
+      { key = "<leader>zF", desc = "Filetypes",          action = run_cmd_if_exists("Filetypes") },
+      { key = "<leader>zH", desc = "Help Tags",          action = run_cmd_if_exists("Helptags") },
     },
   },
   {
     text = "Git (Fugitive)",
-    icon = " ",
+    icon = "󰊢 ",
     keybindings = {
       { key = "<leader>gs", desc = "Git Status",           action = safe_cmd("Git", "Git status") },
       { key = "<leader>ga", desc = "Git Add (current)",    action = safe_cmd("Git add %", "Git add current file") },
@@ -221,7 +257,7 @@ local plugins = {
   },
   {
     text = "DAP (Debugger)",
-    icon = " ",
+    icon = "󰕨 ",
     keybindings = {
       { key = "<F5>",        desc = "Continue / Start",    action = safe_require_call("dap", "continue") },
       { key = "<F10>",       desc = "Step Over",           action = safe_require_call("dap", "step_over") },
@@ -245,7 +281,7 @@ local plugins = {
   },
   {
     text = "QuickFix / Location",
-    icon = " ",
+    icon = "󰌢 ",
     keybindings = {
       { key = "<leader>qo",  desc = "Open QuickFix",       action = safe_cmd("copen", "Open quickfix") },
       { key = "<leader>qc",  desc = "Close QuickFix",      action = safe_cmd("cclose", "Close quickfix") },
@@ -258,7 +294,7 @@ local plugins = {
   },
   {
     text = "Marks & Jumps",
-    icon = " ",
+    icon = "󰙒 ",
     keybindings = {
       { key = "m{a-z}",      desc = "Set Local Mark",      action = safe_cmd("marks", "Show marks") },
       { key = "`{mark}",     desc = "Jump to Mark",        action = safe_cmd("marks", "Show marks") },
