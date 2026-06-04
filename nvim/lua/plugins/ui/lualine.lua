@@ -192,13 +192,13 @@ return {
                     },
                 },
                 lualine_c = {
-                    {
-                        lsp_server,
-                        color = function()
-                            local c = get_colors()
-                            return { fg = c.violet, gui = 'bold' }
-                        end,
-                    },
+                    -- {
+                    --     lsp_server,
+                    --     color = function()
+                    --         local c = get_colors()
+                    --         return { fg = c.violet, gui = 'bold' }
+                    --     end,
+                    -- },
                     {
                         lsp_status,
                         color = function()

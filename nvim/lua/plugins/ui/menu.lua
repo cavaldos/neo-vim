@@ -107,6 +107,34 @@ local function open_floaterm()
   vim.cmd("FloatermToggle")
 end
 
+local function run_current_file()
+  local ok, run = pcall(require, "config.run")
+  if not ok then
+    vim.notify("config.run module not found", vim.log.levels.ERROR)
+    return
+  end
+  run.run()
+end
+
+local function copy_run_command()
+  local ok, run = pcall(require, "config.run")
+  if not ok then
+    vim.notify("config.run module not found", vim.log.levels.ERROR)
+    return
+  end
+  run.copy_command()
+end
+
+local function toggle_dap_ui()
+  local ok, dapui = pcall(require, "dapui")
+  if not ok then
+    vim.notify("dapui unavailable", vim.log.levels.WARN)
+    return
+  end
+
+  dapui.toggle()
+end
+
 local function undo_change()
   vim.cmd("undo")
 end
@@ -135,6 +163,11 @@ local main_menu = {
     name = "Code Actions",
     cmd = vim.lsp.buf.code_action,
     rtxt = "<leader>ca",
+  },
+  {
+    name = "Toggle DAP UI",
+    cmd = toggle_dap_ui,
+    rtxt = "<leader>du",
   },
   {
     name = "Comment Line",
@@ -220,6 +253,16 @@ local main_menu = {
     name = "Open in Terminal",
     cmd = open_floaterm,
     rtxt = "<F1>",
+  },
+  {
+    name = "Run Current File",
+    cmd = run_current_file,
+    rtxt = "<leader>rr",
+  },
+  {
+    name = "Copy Run Command",
+    cmd = copy_run_command,
+    rtxt = "<leader>rm",
   },
 }
 
@@ -437,6 +480,24 @@ return {
           require("menu").open(filetree_menu, config)
         end,
         desc = "Open file menu",
+      },
+      -- Run current file
+      {
+        "<leader>rr",
+        function()
+          local ok, run = pcall(require, "config.run")
+          if ok then run.run() end
+        end,
+        desc = "Run current file",
+      },
+      -- Copy run command
+      {
+        "<leader>rm",
+        function()
+          local ok, run = pcall(require, "config.run")
+          if ok then run.copy_command() end
+        end,
+        desc = "Copy runner command to clipboard",
       },
       -- Right-click: smart menu depending on window type
       {

@@ -260,10 +260,13 @@ local plugins = {
     icon = "󰕨 ",
     keybindings = {
       { key = "<F5>",        desc = "Continue / Start",    action = safe_require_call("dap", "continue") },
-      { key = "<F10>",       desc = "Step Over",           action = safe_require_call("dap", "step_over") },
-      { key = "<F11>",       desc = "Step Into",           action = safe_require_call("dap", "step_into") },
-      { key = "<F12>",       desc = "Step Out",            action = safe_require_call("dap", "step_out") },
+      { key = "<F6>",        desc = "Step Over",           action = safe_require_call("dap", "step_over") },
+      { key = "<F7>",        desc = "Step Into",           action = safe_require_call("dap", "step_into") },
+      { key = "<F8>",        desc = "Step Out",            action = safe_require_call("dap", "step_out") },
+      { key = "<F9>",        desc = "Toggle Breakpoint",   action = safe_require_call("dap", "toggle_breakpoint") },
+      { key = "<F10>",       desc = "Terminate",           action = safe_require_call("dap", "terminate") },
       { key = "<leader>db",  desc = "Toggle Breakpoint",   action = safe_require_call("dap", "toggle_breakpoint") },
+      { key = "<leader>dC",  desc = "Clear Breakpoints",   action = safe_require_call("dap", "clear_breakpoints") },
       { key = "<leader>dr",  desc = "Open REPL",           action = function()
         local ok, dap = pcall(require, "dap")
         if not ok then
@@ -277,6 +280,9 @@ local plugins = {
         end
       end },
       { key = "<leader>du",  desc = "Toggle DAP UI",       action = safe_require_call("dapui", "toggle") },
+      { key = "<leader>do",  desc = "Open DAP UI",         action = safe_require_call("dapui", "open") },
+      { key = "<leader>dx",  desc = "Close DAP UI",        action = safe_require_call("dapui", "close") },
+      { key = "<leader>dt",  desc = "Terminate",           action = safe_require_call("dap", "terminate") },
     },
   },
   {
