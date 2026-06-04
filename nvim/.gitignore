@@ -3,3 +3,5 @@ lazy-lock.json
 lazy.nvim/
 lazy-lock.json
 .theme_cache
+./pack
+/pack

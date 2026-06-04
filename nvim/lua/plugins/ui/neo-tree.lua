@@ -1,4 +1,4 @@
--- Vô hiệu hóa NetRW để tránh xung đột với Neo-tree
+-- Disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -8,6 +8,24 @@ return {
     dependencies = {"nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", -- Không bắt buộc, nhưng khuyến nghị
                     "MunifTanjim/nui.nvim"},
     config = function()
+        -- ✅ FIX APPLY TRANSPARENT BACKGROUND CHO FLOATING WINDOWS CỦA NEO-TREE
+        vim.api.nvim_set_hl(0, "NormalFloat", {
+            fg = "#95B4D9",
+            bg = "NONE"
+        })
+        vim.api.nvim_set_hl(0, "FloatBorder", {
+            fg = "#95B4D9",
+            bg = "NONE"
+        })
+        vim.api.nvim_set_hl(0, "FloatTitle", {
+            fg = "#95B4D9",
+            bg = "NONE"
+        })
+
+        -- If you want to set a specific background color instead of transparent, you can do it like this:
+        -- vim.api.nvim_set_hl(0, "NormalFloat", { fg = "#cdd6f4", bg = "#313244" })
+        -- vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#89b4fa", bg = "#313244" })
+
         require('neo-tree').setup({
             sources = {"filesystem", "buffers", "git_status"},
             source_selector = {
@@ -54,7 +72,7 @@ return {
                 mappings_options = {
                     noremap = true,
                     nowait = true
-                },
+                }
             },
             -- separator_target = vim.api.nvim_win_get_width(0) * 0.1,
             default_component_configs = {
@@ -91,6 +109,9 @@ return {
             event_handlers = {{
                 event = "neo_tree_window_after_open",
                 handler = function(args)
+                    vim.opt_local.fillchars:append({
+                        eob = " "
+                    })
                     if args.position == "left" or args.position == "right" then
                         vim.cmd("wincmd =")
                     end

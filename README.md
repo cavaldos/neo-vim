@@ -12,6 +12,12 @@
 
 ## Installation
 
+### Option 1: Direct One-Liner (Recommended)
+```bash
+git clone --depth 1 https://github.com/cavaldos/neo-vim /tmp/neo-vim && { [ -d ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim-backup-$(date +%s) || true; } && mkdir -p ~/.config && cp -r /tmp/neo-vim/nvim ~/.config/ && rm -rf /tmp/neo-vim
+```
+
+### Option 2: Manual Steps
 ```bash
 # Clone repo
 git clone https://github.com/cavaldos/neo-vim 
