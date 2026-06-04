@@ -26,6 +26,46 @@ return {
 
       dapui.setup()
 
+      -- Customize DAP breakpoint signs + highlights for better visibility
+      vim.fn.sign_define("DapBreakpoint", {
+        text = "●",
+        texthl = "DapBreakpoint",
+        linehl = "",
+        numhl = "",
+      })
+      vim.fn.sign_define("DapBreakpointCondition", {
+        text = "◆",
+        texthl = "DapBreakpointCondition",
+        linehl = "",
+        numhl = "",
+      })
+      vim.fn.sign_define("DapBreakpointRejected", {
+        text = "✗",
+        texthl = "DapBreakpointRejected",
+        linehl = "",
+        numhl = "",
+      })
+      vim.fn.sign_define("DapStopped", {
+        text = "▶",
+        texthl = "DapStopped",
+        linehl = "DapStoppedLine",
+        numhl = "",
+      })
+      vim.fn.sign_define("DapLogPoint", {
+        text = "◇",
+        texthl = "DapLogPoint",
+        linehl = "",
+        numhl = "",
+      })
+
+      -- Bright highlight colors
+      vim.api.nvim_set_hl(0, "DapBreakpoint", { fg = "#e51400", bold = true })
+      vim.api.nvim_set_hl(0, "DapBreakpointCondition", { fg = "#f5a623", bold = true })
+      vim.api.nvim_set_hl(0, "DapBreakpointRejected", { fg = "#6c6c6c" })
+      vim.api.nvim_set_hl(0, "DapStopped", { fg = "#00ff00", bold = true })
+      vim.api.nvim_set_hl(0, "DapLogPoint", { fg = "#61afef" })
+      vim.api.nvim_set_hl(0, "DapStoppedLine", { bg = "#2e2a1e" })
+
       local function open_dap_ui()
         dapui.open()
         vim.notify("DAP UI opened", vim.log.levels.INFO)

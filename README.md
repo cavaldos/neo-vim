@@ -1,26 +1,26 @@
 # neo-vim
 
-
 ![Screenshot](./screenshots/1.png)
 ![Screenshot](./screenshots/2.png)
 ![Screenshot](./screenshots/3.png)
 ![Screenshot](./screenshots/4.png)
 ![Screenshot](./screenshots/5.png)
 ![Screenshot](./screenshots/6.png)
-
-
+![Screenshot](./screenshots/7.png)
 
 ## Installation
 
 ### Option 1: Direct One-Liner (Recommended)
+
 ```bash
 git clone --depth 1 https://github.com/cavaldos/neo-vim /tmp/neo-vim && { [ -d ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim-backup-$(date +%s) || true; } && mkdir -p ~/.config && cp -r /tmp/neo-vim/nvim ~/.config/ && rm -rf /tmp/neo-vim
 ```
 
 ### Option 2: Manual Steps
+
 ```bash
 # Clone repo
-git clone https://github.com/cavaldos/neo-vim 
+git clone https://github.com/cavaldos/neo-vim
 
 cd neo-vim
 # Backup old config (if exists)
@@ -44,27 +44,32 @@ Launch Neovim - Lazy will automatically install all plugins.
 
 ## Plugins
 
-| Plugin | Description |
-|--------|------------|
-| [alpha-nvim](https://github.com/goolord/alpha-nvim) | Startup dashboard |
-| [nvim-autopairs](https://github.com/windwp/nvim-autopairs) | Auto-close brackets/quotes |
-| [Comment.nvim](https://github.com/numToStr/Comment.nvim) | Smart code commenting |
-| [fzf](https://github.com/junegunn/fzf) + [fzf.vim](https://github.com/junegunn/fzf.vim) | Legacy fuzzy finder |
-| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git decorations |
-| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Syntax highlighting |
-| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) | LSP config |
-| [mason.nvim](https://github.com/williamboman/mason.nvim) | LSP package manager |
-| [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim) | Mason + lspconfig bridge |
-| [neoformat](https://github.com/sbdchd/neoformat) | Code formatting |
-| [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim) | File explorer |
-| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) | Autocompletion |
-| [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Modern fuzzy finder |
-| [which-key.nvim](https://github.com/folke/which-key.nvim) | Keybinding hints |
-| [base46](https://github.com/nvchad/base46) | Themes |
-| [copilot.vim](https://github.com/github/copilot.vim) | GitHub Copilot AI |
-| [aerial.nvim](https://github.com/stevearc/aerial.nvim) | Code outline |
-| [noice.nvim](https://github.com/folke/noice.nvim) | Enhanced cmdline UI |
-| [floaterm](https://github.com/nvzone/floaterm) | Terminal toggle |
+| Plugin                                                                                  | Description                   |
+| --------------------------------------------------------------------------------------- | ----------------------------- |
+| [alpha-nvim](https://github.com/goolord/alpha-nvim)                                     | Startup dashboard             |
+| [nvim-autopairs](https://github.com/windwp/nvim-autopairs)                              | Auto-close brackets/quotes    |
+| [Comment.nvim](https://github.com/numToStr/Comment.nvim)                                | Smart code commenting         |
+| [fzf](https://github.com/junegunn/fzf) + [fzf.vim](https://github.com/junegunn/fzf.vim) | Legacy fuzzy finder           |
+| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                             | Git decorations               |
+| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                   | Syntax highlighting           |
+| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                              | LSP config                    |
+| [mason.nvim](https://github.com/williamboman/mason.nvim)                                | LSP package manager           |
+| [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)            | Mason + lspconfig bridge      |
+| [neoformat](https://github.com/sbdchd/neoformat)                                        | Code formatting               |
+| [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)                         | File explorer                 |
+| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                         | Autocompletion                |
+| [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)                      | Modern fuzzy finder           |
+| [which-key.nvim](https://github.com/folke/which-key.nvim)                               | Keybinding hints              |
+| [base46](https://github.com/nvchad/base46)                                              | Themes                        |
+| [copilot.vim](https://github.com/github/copilot.vim)                                    | GitHub Copilot AI             |
+| [nvim-dap](https://github.com/mfussenegger/nvim-dap)                                    | Debug Adapter Protocol client |
+| [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)                                  | Debugging UI panels           |
+| [nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)             | Inline debug values           |
+| [mason-nvim-dap.nvim](https://github.com/jay-babu/mason-nvim-dap.nvim)                  | Mason adapter installer       |
+| [nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python)                      | Python debugging support      |
+| [aerial.nvim](https://github.com/stevearc/aerial.nvim)                                  | Code outline                  |
+| [noice.nvim](https://github.com/folke/noice.nvim)                                       | Enhanced cmdline UI           |
+| [floaterm](https://github.com/nvzone/floaterm)                                          | Terminal toggle               |
 
 ---
 
@@ -72,155 +77,176 @@ Launch Neovim - Lazy will automatically install all plugins.
 
 ### Conventions
 
-| Symbol | Key |
-|--------|-----|
-| `<leader>` | `,` (comma) |
-| `<D>` | Command (⌘) |
-| `<C>` | Control |
-| `<CR>` | Enter/Return |
+| Symbol     | Key          |
+| ---------- | ------------ |
+| `<leader>` | `,` (comma)  |
+| `<D>`      | Command (⌘)  |
+| `<C>`      | Control      |
+| `<CR>`     | Enter/Return |
 
 ---
 
 ### 🚀 General
 
-| Key | Action |
-|-----|--------|
-| `<D-z>` | Undo |
-| `<D-S-Z>` | Redo |
-| `<leader>cm` | Copy messages to clipboard |
+| Key          | Action                         |
+| ------------ | ------------------------------ |
+| `<D-z>`      | Undo                           |
+| `<D-S-Z>`    | Redo                           |
+| `<leader>cm` | Copy messages to clipboard     |
 | `<leader>tb` | Toggle background transparency |
-| `<leader>?` | Show buffer local keymaps |
+| `<leader>?`  | Show buffer local keymaps      |
 
 ---
 
 ### 📁 File Explorer (Neo-tree)
 
-| Key | Action |
-|-----|--------|
+| Key     | Action          |
+| ------- | --------------- |
 | `<C-n>` | Toggle Neo-tree |
 
 ---
 
 ### 🔍 Telescope (Fuzzy Finder)
 
-| Key | Action |
-|-----|--------|
-| `<leader>ff` | Find files |
-| `<leader>fg` | Live grep |
-| `<leader>fb` | Buffers |
-| `<leader>fc` | Commands |
-| `<leader>fr` | Recent files |
+| Key          | Action                                          |
+| ------------ | ----------------------------------------------- |
+| `<leader>ff` | Find files                                      |
+| `<leader>fg` | Live grep                                       |
+| `<leader>fb` | Buffers                                         |
+| `<leader>fc` | Commands                                        |
+| `<leader>fr` | Recent files                                    |
 | `<leader>fF` | Git files (or regular files if not in git repo) |
 
 #### Git Pickers
 
-| Key | Action |
-|-----|--------|
-| `<leader>gs` | Git status |
-| `<leader>gC` | Git commits |
+| Key          | Action         |
+| ------------ | -------------- |
+| `<leader>gs` | Git status     |
+| `<leader>gC` | Git commits    |
 | `<leader>gc` | Buffer commits |
-| `<leader>gb` | Git branches |
-| `<leader>gS` | Git stash |
+| `<leader>gb` | Git branches   |
+| `<leader>gS` | Git stash      |
 
 #### LSP Pickers
 
-| Key | Action |
-|-----|--------|
-| `<leader>ls` | Document symbols |
-| `<leader>lS` | Workspace symbols |
-| `<leader>lr` | LSP references |
-| `<leader>li` | LSP implementations |
-| `<leader>ld` | Document diagnostics |
+| Key          | Action                |
+| ------------ | --------------------- |
+| `<leader>ls` | Document symbols      |
+| `<leader>lS` | Workspace symbols     |
+| `<leader>lr` | LSP references        |
+| `<leader>li` | LSP implementations   |
+| `<leader>ld` | Document diagnostics  |
 | `<leader>lD` | Workspace diagnostics |
 
 #### Theme
 
-| Key | Action |
-|-----|--------|
+| Key          | Action             |
+| ------------ | ------------------ |
 | `<leader>th` | Choose colorscheme |
 
 ---
 
 ### 🔍 FZF (Legacy)
 
-| Key | Action |
-|-----|--------|
-| `<leader>zf` | Files |
-| `<leader>zg` | Live grep (rg) |
-| `<leader>zG` | Git files |
-| `<leader>zs` | Git status files |
-| `<leader>za` | Grep (ag) |
-| `<leader>zb` | Buffers |
-| `<leader>zh` | Recent files |
-| `<leader>z;` | Command history |
-| `<leader>z/` | Search history |
-| `<leader>zl` | BLines |
+| Key          | Action              |
+| ------------ | ------------------- |
+| `<leader>zf` | Files               |
+| `<leader>zg` | Live grep (rg)      |
+| `<leader>zG` | Git files           |
+| `<leader>zs` | Git status files    |
+| `<leader>za` | Grep (ag)           |
+| `<leader>zb` | Buffers             |
+| `<leader>zh` | Recent files        |
+| `<leader>z;` | Command history     |
+| `<leader>z/` | Search history      |
+| `<leader>zl` | BLines              |
 | `<leader>zz` | Lines (all buffers) |
-| `<leader>zt` | Tags |
-| `<leader>zT` | BTags |
-| `<leader>zm` | Marks |
-| `<leader>zq` | Quickfix |
-| `<leader>zw` | Windows |
-| `<leader>zj` | Jumps |
-| `<leader>zc` | Changes |
-| `<leader>ze` | Locate (system) |
-| `<leader>zk` | Keymaps |
-| `<leader>zo` | Commands |
-| `<leader>zn` | Snippets |
-| `<leader>zC` | Colorschemes |
-| `<leader>zF` | Filetypes |
-| `<leader>zH` | Help tags |
+| `<leader>zt` | Tags                |
+| `<leader>zT` | BTags               |
+| `<leader>zm` | Marks               |
+| `<leader>zq` | Quickfix            |
+| `<leader>zw` | Windows             |
+| `<leader>zj` | Jumps               |
+| `<leader>zc` | Changes             |
+| `<leader>ze` | Locate (system)     |
+| `<leader>zk` | Keymaps             |
+| `<leader>zo` | Commands            |
+| `<leader>zn` | Snippets            |
+| `<leader>zC` | Colorschemes        |
+| `<leader>zF` | Filetypes           |
+| `<leader>zH` | Help tags           |
 
 ---
 
 ### 🤖 Copilot (AI)
 
-| Key | Action |
-|-----|--------|
+| Key     | Action                                |
+| ------- | ------------------------------------- |
 | `<Tab>` | Accept suggestion (or insert literal) |
-| `<C-J>` | Accept suggestion |
-| `<C-K>` | Next suggestion |
-| `<C-H>` | Previous suggestion |
-| `<C-L>` | Dismiss suggestion |
+| `<C-J>` | Accept suggestion                     |
+| `<C-K>` | Next suggestion                       |
+| `<C-H>` | Previous suggestion                   |
+| `<C-L>` | Dismiss suggestion                    |
 
 ---
 
-### 💻 Terminal
+### DAP Debugging
 
-| Key | Action |
-|-----|--------|
-| `<F1>` | Toggle terminal |
+| Key          | Action                     |
+| ------------ | -------------------------- |
+| `<F5>`       | Continue / Start debugging |
+| `<F6>`       | Step over                  |
+| `<F7>`       | Step into                  |
+| `<F8>`       | Step out                   |
+| `<F9>`       | Toggle breakpoint          |
+| `<F10>`      | Terminate debugging        |
+| `<leader>db` | Toggle breakpoint          |
+| `<leader>dc` | Continue                   |
+| `<leader>dr` | Open DAP REPL              |
+| `<leader>dl` | Run last debug session     |
+| `<leader>du` | Toggle DAP UI              |
+| `<leader>do` | Open DAP UI                |
+| `<leader>dx` | Close DAP UI               |
+| `<leader>dt` | Terminate debugging        |
+
+---
+
+### Terminal
+
+| Key     | Action                   |
+| ------- | ------------------------ |
+| `<F1>`  | Toggle terminal          |
 | `<C-p>` | Previous terminal buffer |
-| `<C-n>` | Next terminal buffer |
+| `<C-n>` | Next terminal buffer     |
 
 ---
 
 ### ✏️ Completion (nvim-cmp)
 
-| Key | Action |
-|-----|--------|
+| Key         | Action             |
+| ----------- | ------------------ |
 | `<C-Space>` | Trigger completion |
-| `<CR>` | Confirm completion |
-| `<C-b>` | Scroll docs up |
-| `<C-f>` | Scroll docs down |
-| `<C-e>` | Abort completion |
-| `<Down>` | Next item |
-| `<Up>` | Previous item |
+| `<CR>`      | Confirm completion |
+| `<C-b>`     | Scroll docs up     |
+| `<C-f>`     | Scroll docs down   |
+| `<C-e>`     | Abort completion   |
+| `<Down>`    | Next item          |
+| `<Up>`      | Previous item      |
 
 ---
 
 ### 🌳 Code Structure (Aerial)
 
-| Key | Action |
-|-----|--------|
+| Key     | Action              |
+| ------- | ------------------- |
 | `<C-a>` | Toggle code outline |
 
 ---
 
 ### 📝 Formatting
 
-| Key | Action |
-|-----|--------|
+| Key     | Action                  |
+| ------- | ----------------------- |
 | `<D-f>` | Format code (Neoformat) |
 
 > **Note:** Neoformat auto-formats on save.
@@ -229,8 +255,8 @@ Launch Neovim - Lazy will automatically install all plugins.
 
 ### 🖱️ Mouse
 
-| Action | Action |
-|--------|--------|
+| Action               | Action                     |
+| -------------------- | -------------------------- |
 | Click on Sign column | Open Telescope diagnostics |
 
 ---
