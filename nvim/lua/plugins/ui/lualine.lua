@@ -132,7 +132,7 @@ return {
                         padding = 0,
                         color = { bg = 'NONE', fg = 'NONE' },
                     },
-                    {  
+                    {
                         'mode', -- icon cho chế độ NORMAL
                         fmt = function(str)
                             if str == 'NORMAL' then
@@ -241,7 +241,7 @@ return {
                     'encoding',
                     'fileformat',
                     'filetype',
-                    
+
                 },
                 lualine_z = {
                     -- icon gear setting

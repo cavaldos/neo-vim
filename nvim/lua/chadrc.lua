@@ -11,4 +11,11 @@ M.base46 = {
   },
 }
 
+M.ui = {
+  tabufline = {
+    enabled = true,
+    lazyload = false, 
+  },
+}
+
 return M

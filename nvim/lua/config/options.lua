@@ -40,6 +40,12 @@ vim.opt.undofile = true
 vim.opt.clipboard:append("unnamedplus")
 vim.opt.scrolloff = 8
 
+--  Auto-remove trailing whitespace on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    command = "%s/\\s\\+$//e"
+})
+
 -- Fallback syntax highlighting cho trường hợp Treesitter chưa attach
 vim.cmd("syntax enable")
 

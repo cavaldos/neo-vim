@@ -57,7 +57,7 @@ Launch Neovim - Lazy will automatically install all plugins.
 | [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)            | Mason + lspconfig bridge      |
 | [neoformat](https://github.com/sbdchd/neoformat)                                        | Code formatting               |
 | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)                         | File explorer                 |
-| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                         | Autocompletion                |
+| [blink.cmp](https://github.com/saghen/blink.cmp)                                        | Autocompletion                |
 | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)                      | Modern fuzzy finder           |
 | [which-key.nvim](https://github.com/folke/which-key.nvim)                               | Keybinding hints              |
 | [base46](https://github.com/nvchad/base46)                                              | Themes                        |

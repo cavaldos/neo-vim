@@ -144,7 +144,30 @@ local function terminal_channel_from_window(winid)
   return channel
 end
 
-local function send_to_floaterm(command)
+local function has_floaterm()
+  return vim.fn.exists(":FloatermToggle") == 2
+end
+
+local function send_to_builtin_terminal(command)
+  vim.cmd("botright split | terminal")
+  vim.schedule(function()
+    local buffer = vim.api.nvim_get_current_buf()
+    local channel = vim.bo[buffer].channel
+    if channel == nil or channel == 0 then
+      vim.notify("Could not open terminal channel", vim.log.levels.ERROR)
+      return
+    end
+    vim.fn.chansend(channel, command .. "\n")
+    vim.cmd("startinsert")
+  end)
+end
+
+local function send_to_terminal(command)
+  if not has_floaterm() then
+    send_to_builtin_terminal(command)
+    return
+  end
+
   if vim.bo.buftype ~= "terminal" then
     vim.cmd("FloatermToggle")
   end
@@ -177,7 +200,7 @@ function M.run()
   if command == nil then
     return
   end
-  send_to_floaterm(command)
+  send_to_terminal(command)
 end
 
 function M.build_command(opts)

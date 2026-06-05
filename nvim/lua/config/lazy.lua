@@ -8,7 +8,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Load config
 require("config.options")
-require("config.autocmds")
 require("config.keymaps")
 require("config.run")
 
