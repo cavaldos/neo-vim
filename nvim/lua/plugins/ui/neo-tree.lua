@@ -72,6 +72,16 @@ return {
                 mappings_options = {
                     noremap = true,
                     nowait = true
+                },
+                mappings = {
+                    ["<Tab>"] = "next_source",
+                    ["<S-Tab>"] = "prev_source",
+                    ["<A-,>"] = function(_state)
+                        vim.cmd("bprevious")
+                    end,
+                    ["<A-.>"] = function(_state)
+                        vim.cmd("bnext")
+                    end,
                 }
             },
             -- separator_target = vim.api.nvim_win_get_width(0) * 0.1,

@@ -59,13 +59,28 @@ vim.keymap.set('n', '<leader>tb', function()
   end
 end, { desc = 'Toggle background transparency' })
 
--- Telescope theme picker 
+-- Telescope theme picker
 vim.keymap.set("n", "<leader>tn", "<cmd>Telescope themes<cr>", { desc = "Choose theme" })
 
 -- Buffer navigation
 vim.keymap.set("n", "L", "<cmd>bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "H", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<C-.>", "<cmd>bnext<cr>", { desc = "Next buffer" })
-vim.keymap.set("n", "<C-,>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<A-.>", "<cmd>bnext<cr>", { desc = "Next buffer (Alt+.)" })
+vim.keymap.set("n", "<A-,>", "<cmd>bprevious<cr>", { desc = "Previous buffer (Alt+,)" })
 
 vim.keymap.set("n", "<leader>uh", "<cmd>nohlsearch<CR>")
+
+-- Chọn tất cả trong Normal Mode
+vim.keymap.set('n', '<C-a>', 'ggVG', { desc = 'Select All' })
+
+-- Chọn tất cả trong Visual Mode
+vim.keymap.set('v', '<C-a>', 'ggVG', { desc = 'Select All' })
+
+-- Diagnostics navigation
+vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, { desc = "Next diagnostic" })
+vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, { desc = "Prev diagnostic" })
+
+-- Show diagnostic float tại vị trí cursor
+vim.keymap.set("n", "<leader>e", function() vim.diagnostic.open_float() end, { desc = "Show diagnostic" })
+
+

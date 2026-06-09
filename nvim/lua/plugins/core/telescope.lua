@@ -55,7 +55,6 @@ return {
         layout_config = {
           horizontal = {
             preview_width = 0.55,
-            results_width = 0.45,
           },
           width = 0.87,
           height = 0.80,
@@ -64,10 +63,9 @@ return {
       },
       pickers = {
         diagnostics = {
-          theme = "ivy",
           initial_mode = "normal",
           layout_config = {
-            preview_cutoff = 9999,
+            preview_width = 0.6,
           },
         },
         colorscheme = {
@@ -121,10 +119,8 @@ return {
     vim.keymap.set("n", "<leader>th", builtin.colorscheme, { desc = "Choose theme" })
 
     -- Diagnostics
-    vim.keymap.set("n", "<leader>ld", function()
-      builtin.diagnostics({ bufnr = 0 })
-    end, { desc = "Document Diagnostics" })
-    vim.keymap.set("n", "<leader>lD", builtin.diagnostics, { desc = "Workspace Diagnostics" })
+    vim.keymap.set("n", "<leader>ld", "<cmd>Telescope diagnostics bufnr=0<cr>", { desc = "Document Diagnostics" })
+    vim.keymap.set("n", "<leader>lD", "<cmd>Telescope diagnostics<cr>", { desc = "Workspace Diagnostics" })
 
     -- LSP pickers
     vim.keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, { desc = "Document Symbols" })

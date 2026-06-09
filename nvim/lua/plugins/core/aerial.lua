@@ -6,10 +6,10 @@ return {
     config = function()
         require('aerial').setup()
         -- tao phim tat
-        vim.keymap.set("n", "<C-a>", "<CMD>AerialToggle<CR>", {
-            noremap = true,
-            silent = true
-        })
+        -- vim.keymap.set("n", "<C-a>", "<CMD>AerialToggle<CR>", {
+        --     noremap = true,
+        --     silent = true
+        -- })
 
     end
 
